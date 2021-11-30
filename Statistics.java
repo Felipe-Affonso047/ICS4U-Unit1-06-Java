@@ -66,11 +66,7 @@ final class Statistics {
         if (numbersOfNumbers % 2 == 0) {
             final int numberOfMedian1 = (numbersOfNumbers / 2) - 1;
             final int median1 = arrayOfIntegers[numberOfMedian1];
-            final int numberOfMedian2 = numbersOfNumbers / 2;
-            final int median2 = arrayOfIntegers[numberOfMedian2];
-            returnValue = (median1 + median2) / 2;
-        } else {
-            final int numberOfMedian = (int) (((double) numbersOfNumbers / 2.0) + 0.5);
+            
             returnValue = arrayOfIntegers[numberOfMedian];
         }
         return returnValue;
@@ -84,7 +80,31 @@ final class Statistics {
     */
     public static List<Integer> mode(final Integer[] numbers) {
         List<Integer> modes = new ArrayList<Integer>();
-        modes.add(1);
+        final int numbersOfNumbers = arrayOfIntegers.length;
+        int maxCount = 0;
+        Arrays.sort(arrayOfIntegers);
+        for (counter = 0; counter <= numbersOfNumbers; counter ++) {
+            int count = 0;
+            for (counting = true; counting == true;) {
+                final int comparing = counter + count;
+                if (arrayOfIntegers[counter] == arrayOfIntegers[comparing]) {
+                    count ++;
+                    if (count > maxCount) {
+                        maxCount = count;
+                        for (remove = 0; remove <= modes.length; remove++) {
+                            modes[remove] = null;
+                        }
+                        mode.add(0, arrayOfIntegers[counter]);
+                    } else if (count == maxCount) {
+                        mode.add(1, arrayOfIntegers[counter]);
+                    } else {
+                        break;
+                    }
+                } else {
+                    counting = false;
+                }
+            }
+        }
         return modes;
     }
 
