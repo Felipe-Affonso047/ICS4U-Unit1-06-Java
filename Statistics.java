@@ -2,9 +2,9 @@
 * This is a program that calculates mean, median and mode
 * after reading in a text file into an array.
 *
-* @author  Mr Coxall
+* @author  Felipe Garcia Affonso
 * @version 1.0
-* @since   2020-01-01
+* @since   2021-11-29
 */
 
 import java.io.BufferedReader;
