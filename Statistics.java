@@ -15,9 +15,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
 * This is the statistics program.
@@ -43,9 +41,9 @@ final class Statistics {
     * @return the mean of the integers
     */
     public static double mean(final Integer[] arrayOfIntegers) {
-        int size = arrayOfIntegers.length;
+        final int size = arrayOfIntegers.length;
         int total = 0;
-        for (int counter = 0; counter < size; counter ++) {
+        for (int counter = 0; counter < size; counter++) {
             // code block to be executed
             total = total + arrayOfIntegers[counter];
         }
@@ -66,7 +64,12 @@ final class Statistics {
         if (numbersOfNumbers % 2 == 0) {
             final int numberOfMedian1 = (numbersOfNumbers / 2) - 1;
             final int median1 = arrayOfIntegers[numberOfMedian1];
-            
+            final int numberOfMedian2 = numbersOfNumbers / 2;
+            final int median2 = arrayOfIntegers[numberOfMedian2];
+            returnValue = (median1 + median2) / 2;
+        } else {
+            final int numberOfMedian = (int) (
+                ((double) numbersOfNumbers / 2.0) + 0.5);
             returnValue = arrayOfIntegers[numberOfMedian];
         }
         return returnValue;
@@ -78,31 +81,24 @@ final class Statistics {
     * @param numbers the collection of integers
     * @return the mode of the integers
     */
-    public static List<Integer> mode(final Integer[] numbers) {
-        List<Integer> modes = new ArrayList<Integer>();
-        final int numbersOfNumbers = arrayOfIntegers.length;
+    static List<Integer> mode(final Integer[] numbers) {
+        final List<Integer> modes = new ArrayList<Integer>();
+        final var arrayOfIntegers = numbers;
         int maxCount = 0;
         Arrays.sort(arrayOfIntegers);
-        for (counter = 0; counter <= numbersOfNumbers; counter ++) {
+        for (int comparing1 : arrayOfIntegers) {
             int count = 0;
-            for (counting = true; counting == true;) {
-                final int comparing = counter + count;
-                if (arrayOfIntegers[counter] == arrayOfIntegers[comparing]) {
-                    count ++;
-                    if (count > maxCount) {
-                        maxCount = count;
-                        for (remove = 0; remove <= modes.length; remove++) {
-                            modes[remove] = null;
-                        }
-                        mode.add(0, arrayOfIntegers[counter]);
-                    } else if (count == maxCount) {
-                        mode.add(1, arrayOfIntegers[counter]);
-                    } else {
-                        break;
-                    }
-                } else {
-                    counting = false;
+            for (var comparing2 : arrayOfIntegers) {
+                if (comparing1 == comparing2) {
+                    count++;
                 }
+            }
+            if (count > maxCount) {
+                maxCount = count;
+                modes.clear();
+                modes.add(0, comparing1);
+            } else if (count == maxCount) {
+                modes.add(0, comparing1);
             }
         }
         return modes;
