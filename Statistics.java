@@ -98,7 +98,9 @@ final class Statistics {
                 modes.clear();
                 modes.add(0, comparing1);
             } else if (count == maxCount) {
-                modes.add(0, comparing1);
+                if (comparing1 != modes.get(0)) {
+                    modes.add(0, comparing1);
+                }
             }
         }
         return modes;
